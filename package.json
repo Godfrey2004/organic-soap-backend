@@ -4,10 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev" : " node src/server.js",
+    "start": "node server.js"
+   
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Godfrey2004/organic-soap-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Godfrey2004/organic-soap-backend/issues"
+  },
+  "homepage": "https://github.com/Godfrey2004/organic-soap-backend#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
 }
