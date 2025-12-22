@@ -1,17 +1,11 @@
-import express from"express";
-import { registerRoutes } from "./modules/index.js";
-import { errorHandler } from "./middleware/error.middleware.js";
+export const errorHandler = (err, req, res, next) => {
+  console.error(err);
 
-const app = express();
+  const status = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
 
-app.use(express.json());
-
-app.get("/health",(req,res)=>{
-    res.json({status:"OK", message:"API IS RUNNING "});
-});
-
-registerRoutes(app);
-
-app.use(errorHandler);
-
-export default app;
+  res.status(status).json({
+    success: false,
+    message
+  });
+};

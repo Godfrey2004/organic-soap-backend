@@ -1,14 +1,15 @@
 import express from "express";
 import { registerRoutes } from "./modules/index.js";
+import { errorHandler } from "./middleware/error.middleware.js";
+
 const app = express();
-// middle ware
+
+// ✅ BODY PARSER — MUST BE BEFORE ROUTES
 app.use(express.json());
 
-//health check route
-app.get("/health",(req,res)=>{
-    res.json({status:"OK",message:"API IS RUNNING "});
-});
-
-// register all routes
 registerRoutes(app);
+
+// error handler LAST
+app.use(errorHandler);
+
 export default app;
