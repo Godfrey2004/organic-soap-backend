@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev" : " node src/server.js",
+    "dev": " node src/server.js",
     "start": "node server.js"
-   
   },
   "keywords": [],
   "author": "",
@@ -21,8 +20,10 @@
   },
   "homepage": "https://github.com/Godfrey2004/organic-soap-backend#readme",
   "dependencies": {
+    "@prisma/client": "^6.19.1",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "prisma": "^6.19.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
