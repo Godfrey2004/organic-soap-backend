@@ -1,7 +1,13 @@
 import { Router } from "express";
-import { successResponse } from "../../utils/response.js";
+import { create, list } from "./products.controller.js";
+import { authenticate, authorizeAdmin } from "../../middleware/auth.middleware.js";
 
 const router = Router();
+
+// PUBLIC – list products
+router.get("/", list);
+// admin only - create product
+router.post("/", authenticate, authorizeAdmin, create);
 
 router.get("/", (req, res) => {
   successResponse(res, "Products fetched successfully", []);
