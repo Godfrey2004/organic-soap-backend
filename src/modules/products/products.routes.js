@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { create, list } from "./products.controller.js";
+import { create, list,update, remove } from "./products.controller.js";
 import { authenticate, authorizeAdmin } from "../../middleware/auth.middleware.js";
 
 const router = Router();
@@ -8,6 +8,10 @@ const router = Router();
 router.get("/", list);
 // admin only - create product
 router.post("/", authenticate, authorizeAdmin, create);
+router.put("/:id", authenticate, authorizeAdmin, update);
+router.delete("/:id", authenticate, authorizeAdmin, remove);
+
+
 
 router.get("/", (req, res) => {
   successResponse(res, "Products fetched successfully", []);
