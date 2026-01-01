@@ -10,6 +10,8 @@ export const createOrder = async (userId, items) => {
   let totalAmount = 0;
   const validatedItems = [];
 
+  
+
   // Validate products & calculate total
   for (const item of items) {
     const product = await prisma.product.findUnique({
@@ -71,3 +73,41 @@ export const createOrder = async (userId, items) => {
 
   return order;
 };
+// USER – get own orders
+export const getUserOrders = async (userId) => {
+  const orders = await prisma.order.findMany({
+    where: { userId },
+    include: {
+      items: {
+        include: {
+          product: true
+        }
+      }
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  return orders;
+};
+
+// ADMIN – get all orders
+export const getAllOrders = async () => {
+  const orders = await prisma.order.findMany({
+    include: {
+      user: true,
+      items: {
+        include: {
+          product: true
+        }
+      }
+    },
+    orderBy: {
+      createdAt: "desc"
+    }
+  });
+
+  return orders;
+};
+
