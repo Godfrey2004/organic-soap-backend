@@ -1,7 +1,8 @@
 import {
   createOrder,
   getUserOrders,
-  getAllOrders
+  getAllOrders,
+  updateOrderStatus
 } from "./orders.service.js";
 
 import { successResponse } from "../../utils/response.js";
@@ -31,6 +32,19 @@ export const allOrders = async (req, res, next) => {
   try {
     const orders = await getAllOrders();
     successResponse(res, "All orders fetched", orders);
+  } catch (error) {
+    next(error);
+  }
+};
+// ADMIN – update order status
+export const updateStatus = async (req, res, next) => {
+  try {
+    const { status } = req.body;        // read from body
+    const orderId = req.params.id;      // read from URL
+
+    const updatedOrder = await updateOrderStatus(orderId, status);
+
+    successResponse(res, "Order status updated", updatedOrder);
   } catch (error) {
     next(error);
   }

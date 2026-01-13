@@ -110,4 +110,27 @@ export const getAllOrders = async () => {
 
   return orders;
 };
+// ADMIN – update order status
+export const updateOrderStatus = async (orderId, status) => {
+  const order = await prisma.order.findUnique({
+    where: { id: Number(orderId) }
+  });
+
+  // If order does not exist
+  if (!order) {
+    const error = new Error("Order not found");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  // Update only status
+  const updatedOrder = await prisma.order.update({
+    where: { id: Number(orderId) },
+    data: {
+      status
+    }
+  });
+
+  return updatedOrder;
+};
 

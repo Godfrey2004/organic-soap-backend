@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
   placeOrder,
   myOrders,
-  allOrders
+  allOrders,
+  updateStatus
 } from "./orders.controller.js";
 
 import {
@@ -10,13 +11,20 @@ import {
   authorizeAdmin
 } from "../../middleware/auth.middleware.js";
 
+// Initialize router FIRST
 const router = Router();
 
-// USER
+// USER routes
 router.post("/", authenticate, placeOrder);
 router.get("/my", authenticate, myOrders);
 
-// ADMIN
+// ADMIN routes
 router.get("/", authenticate, authorizeAdmin, allOrders);
+router.patch(
+  "/:id/status",
+  authenticate,
+  authorizeAdmin,
+  updateStatus
+);
 
 export default router;
